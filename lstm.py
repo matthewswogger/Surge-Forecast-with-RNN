@@ -46,12 +46,24 @@ def prepare_data(data, time_steps, labels=False, val_size=0.1, test_size=0.1):
 
 def generate_data(x, time_steps, seperate=False):
     """generates data with based on a function fct"""
-    df = x
-    df_0 = df[df.point == 0.0]
-    df_0 = df_0.reset_index(drop=True)
-    df_15 = df[df.point == 15.0]
-    df_15 = df_15.reset_index(drop=True)
-    data = pd.concat([df_0['surge'], df_15['surge']], axis=1, keys=['surge_0', 'surge_15'])
+    def build_dataframes_for_points(df):
+        point_list = [0, 1, 2, 3, 14, 15, 16, 12, 13, 24, 25, 26, 27, 28, 17, 29]
+        return [df[df.point == point].reset_index(drop=True) for point in point_list]
+
+    df_0,df_1,df_2,df_3,df_14,df_15,df_16,df_12,df_13,df_24,df_25,df_26,\
+                        df_27,df_28,df_17,df_29 = build_dataframes_for_points(x)
+
+    surge_keys = ['surge_0', 'surge_1', 'surge_2', 'surge_3',\
+                  'surge_14', 'surge_15', 'surge_16', 'surge_12', 'surge_13',\
+                  'surge_24', 'surge_25', 'surge_26', 'surge_27', 'surge_28',\
+                  'surge_17', 'surge_29']
+
+    df_list = [df_0['surge'], df_1['surge'], df_2['surge'],df_3['surge'],\
+               df_14['surge'], df_15['surge'], df_16['surge'], df_12['surge'],\
+               df_13['surge'], df_24['surge'], df_25['surge'], df_26['surge'],\
+               df_27['surge'], df_28['surge'], df_17['surge'], df_29['surge']]
+
+    data = pd.concat(df_list, axis=1, keys=surge_keys)
     if not isinstance(data, pd.DataFrame):
         data = pd.DataFrame(data)
     train_x, val_x, test_x = prepare_data(data['a'] if seperate else data, time_steps)
