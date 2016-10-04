@@ -53,12 +53,12 @@ def prepare_and_split_data(df, TIMESTEPS):
                         'point_15', 'point_16', 'point_12', 'point_13', 'point_24', 'point_25','point_26', 'point_27',\
                         'point_28', 'point_17', 'point_29'])
 
-    df_forecast = df_surge[5:].reset_index(drop=True)# the number 5 is how far ahead we will predict
+    df_forecast = df_surge[TIMESTEPS+5:].reset_index(drop=True)# the number 5 gives us 5 min forecast
     df_surge = df_surge[:len(df_forecast)].reset_index(drop=True)
     my_y = np.array(df_forecast) # this is the target forecast of 5min ahead
     surge_np = np.array(df_surge)
     my_x = np.empty([len(my_y),TIMESTEPS,16]) # filled with zeros that will be replaced with surge data
-    for i, points_row in enumerate(surge_np):
+    for i, _ in enumerate(surge_np):
         time_chunk = surge_np[i:i+TIMESTEPS,:]
         if time_chunk.shape == (TIMESTEPS, 16):
             my_x[i,:,:] = time_chunk
