@@ -13,6 +13,10 @@ class EstimatorSelectionHelper:
         self.grid_searches = {}
 
     def fit(self, X, y, cv=5, n_jobs=1, verbose=1, scoring=None, refit=False):
+        '''
+        This fits all the models I feed it on all of the combinations
+        of parameters and runs cross validation as well.
+        '''
         for key in self.keys:
             print("Running GridSearchCV for %s." % key)
             model = self.models[key]
@@ -23,6 +27,11 @@ class EstimatorSelectionHelper:
             self.grid_searches[key] = gs
 
     def score_summary(self, sort_by='mean_score'):
+        '''
+        This builds and prints a pandas dataframe of the summary of all the
+        different fits of the models and orders them by best performing
+        in a category that you tell it to.
+        '''
         def row(key, scores, params):
             d = {'estimator': key,
                  'min_score': min(scores),
