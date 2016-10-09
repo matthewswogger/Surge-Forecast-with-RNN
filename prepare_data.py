@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
+from sklearn.cross_validation import train_test_split
 
 class prepare_data:
     def __init__(self, df):
         self.df = df
         self.dataframe_dict = {}
-
 
     def build_dataframes_for_points(self):
         '''
@@ -35,12 +35,16 @@ class prepare_data:
         the individual points and the value is another dict like: {'X': X,
                                                                    'y': y,
                                                                    'X_hold_out': X_hold_out,
-                                                                   'y_hold_out': y_hold_out}.
+                                                                   'y_hold_out': y_hold_out'
+                                                                   'X_train':X_train,
+                                                                   'X_test':X_test,
+                                                                   'y_train':y_train,
+                                                                   'y_test':y_test}.
         '''
         for point, d_f in self.all_frames:
             array = np.array([d_f.surge[i:i+past] for i in xrange(len(d_f.surge)-past)])
             array = array[:,::-1]
-            #make a small hold out sample to conserve the timeseries nature of this, I'll graph it later
+            # make a small hold out sample to conserve the timeseries nature of this, I'll graph it later
             hold_out_array = array[-500:,:]
             y_hold_out = hold_out_array[:,0]
             X_hold_out = hold_out_array[:,forecast:]
@@ -49,7 +53,10 @@ class prepare_data:
             training_testing_array = array[:-500,:]
             y = training_testing_array[:,0]
             X = training_testing_array[:,forecast:]
-            self.dataframe_dict[point]={'X':X, 'y':y, 'X_hold_out':X_hold_out, 'y_hold_out':y_hold_out}
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+            self.dataframe_dict[point]={'X':X, 'y':y, 'X_hold_out':X_hold_out, 'y_hold_out':y_hold_out,
+                                'X_train':X_train, 'X_test':X_test, 'y_train':y_train, 'y_test':y_test}
+
         print 'Names of points so you know what'
         print 'keys to use in get_point_data:'
         for point in self.dataframe_dict.keys():
