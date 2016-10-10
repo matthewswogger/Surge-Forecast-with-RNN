@@ -57,13 +57,8 @@ class prepare_data:
             self.dataframe_dict[point]={'X':X, 'y':y, 'X_hold_out':X_hold_out, 'y_hold_out':y_hold_out,
                                 'X_train':X_train, 'X_test':X_test, 'y_train':y_train, 'y_test':y_test}
 
-        print 'Names of points so you know what'
-        print 'keys to use in get_point_data:'
-        for point in self.dataframe_dict.keys():
-            print "get_point_data('{}')".format(point)
-
-    def get_point_data(self,what_point):
+    def get_point_data(self):
         '''
-        This returns one dictionary value so that you can use it.
+        This returns the dictionary so that you can use it.
         '''
-        return self.dataframe_dict[what_point]
+        return self.dataframe_dict
