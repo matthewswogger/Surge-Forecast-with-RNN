@@ -4,17 +4,28 @@ Matthew Swogger, October 2016
 
 #### Overview
 
-My capstone project for Galvanize Data Science Immersive was about forecasting the Surge multiplier
-for Uber Rideshare drivers. The idea was to see if I could tell drivers where and at what value the
-surge would be before it happened. After thinking about how far into the future would be useful to a driver I
-settled on 5 min; I figured this would be enough time in a crowded city for a driver to
-both have enough time to decide
-on where they would start heading as well as enough
-time to get there without speeding and chancing a ticket, after all this is about making
-money and paying for tickets is the opposite of that.
+My capstone project for Galvanize Data Science Immersive was about forecasting
+the Surge multiplier for Uber Rideshare drivers. The idea was to see if I could
+tell drivers where and at what value the surge would be before it happened.
+After thinking about how far into the future would be useful to a driver I
+settled on 5 min; I figured this would be enough time in a crowded city for a
+driver to both have enough time to decide on where they would start heading as
+well as enough time to get there without speeding and chancing a ticket, after
+all this is about making money and paying for tickets is the opposite of that.
 
-
-
+So it's time series, I know how to do that, throw an ARIMA model at it. Maybe
+I have to difference the data once or twice and I'll need to see which lags
+should be used by looking at the Autocorrelation and Partial Autocorrelation
+but basically it's straight forward, right? Wrong! Time series implementation in
+Python does not do it justice. I spent days watching
+`statsmodels.tsa.statespace.sarimax.SARIMAX` blow up when I change one thing
+in the parameters. I'd add one extra lag and it throws an error, the data
+had not changed. Ask the internet what is going on and the answer is, 'if you're
+doing time series you need to use R.' Anyway, I got through it, got it to
+forecast well enough, with about an 89% accuracy, and it passed the 'would this
+actually be useful to me if I was trying to make money Rideshareing,' it would
+be a nice little addition. But it got me thinking about other ways to implement
+this.
 
 ## Forecast of first 8 points
 
