@@ -2,6 +2,20 @@
 
 Matthew Swogger, October 2016
 
+#### Overview
+
+My capstone project for Galvanize Data Science Immersive was about forecasting the Surge multiplier
+for Uber Rideshare drivers. The idea was to see if I could tell drivers where and at what value the
+surge would be before it happened. After thinking about how far into the future would be useful to a driver I
+settled on 5 min; I figured this would be enough time in a crowded city for a driver to
+both have enough time to decide
+on where they would start heading as well as enough
+time to get there without speeding and chancing a ticket, after all this is about making
+money and paying for tickets is the opposite of that.
+
+
+
+
 ## Forecast of first 8 points
 
 ![](forecast_1.png)
@@ -10,11 +24,7 @@ Matthew Swogger, October 2016
 
 ![](forecast_2.png)
 
-#### Overview
 
-View the app live at Ryd.io
-
-The idea of this project is to allow a user, or marketing lead, to explore and learn about a city from the frequency and volume of taxi drop off points to focus marketing efforts. My goal was to provide an alternative view of a city that has been clustered into subgroups outlining different weekly and daily ride distributions.
 
 #### Example
 
