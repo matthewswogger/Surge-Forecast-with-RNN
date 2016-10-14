@@ -35,7 +35,7 @@ class split_for_plot:
                 break
             plt.subplot(subs[count])
             plt.plot(values,label='3 min forecast',color='k')
-            plt.plot(self.true_values[point]['y_hold_out'],label='true {}'.format(point),color='c')
+            plt.plot(np.insert(self.true_values[point]['y_hold_out'],0,[1.0,1.0]),label='true {}'.format(point),color='c')
             plt.legend()
             count += 1
         plt.savefig('forecast_1.png', bbox_inches='tight', dpi=300)
@@ -55,7 +55,7 @@ class split_for_plot:
                 break
             plt.subplot(subs[count])
             plt.plot(values,label='3 min forecast',color='k')
-            plt.plot(self.true_values[point]['y_hold_out'],label='true {}'.format(point),color='c')
+            plt.plot(np.insert(self.true_values[point]['y_hold_out'],0,[1.0,1.0]),label='true {}'.format(point),color='c')
             plt.legend()
             count += 1
         plt.savefig('forecast_2.png', bbox_inches='tight', dpi=300)
