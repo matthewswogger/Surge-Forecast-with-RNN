@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-class split_for_plot:
+class second_split_for_plot:
     def __init__(self,predicted_values, true_values):
         '''
         Went ahead and used this to split the predicted_values into two
@@ -21,7 +21,7 @@ class split_for_plot:
                 self.second_8[point]=value
             count+=1
 
-    def plot_1(self):
+    def second_plot_1(self):
         '''
         This is for the first 8 points to be plotted, they are not in any
         order due to using dictionaries.
@@ -41,7 +41,7 @@ class split_for_plot:
         plt.savefig('forecast_1.png', bbox_inches='tight', dpi=300)
         plt.show()
 
-    def plot_2(self):
+    def second_plot_2(self):
         '''
         This is for the second 8 points to be plotted, they are not in any
         order due to using dictionaries.

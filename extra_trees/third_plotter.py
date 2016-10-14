@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-class split_for_plot:
+class third_split_for_plot:
     def __init__(self,predicted_values, true_values):
         '''
         Went ahead and used this to split the predicted_values into two
@@ -21,7 +21,7 @@ class split_for_plot:
                 self.second_8[point]=value
             count+=1
 
-    def plot_1(self):
+    def third_plot_1(self):
         '''
         This is for the first 8 points to be plotted, they are not in any
         order due to using dictionaries.
@@ -35,13 +35,13 @@ class split_for_plot:
                 break
             plt.subplot(subs[count])
             plt.plot(values,label='3 min forecast',color='k')
-            plt.plot(self.true_values[point]['y_hold_out'],label='true {}'.format(point),color='c')
+            plt.plot(np.insert(self.true_values[point]['y_hold_out'],0,[1.0,1.0]),label='true {}'.format(point),color='c')
             plt.legend()
             count += 1
         plt.savefig('forecast_1.png', bbox_inches='tight', dpi=300)
         plt.show()
 
-    def plot_2(self):
+    def third_plot_2(self):
         '''
         This is for the second 8 points to be plotted, they are not in any
         order due to using dictionaries.
@@ -55,7 +55,7 @@ class split_for_plot:
                 break
             plt.subplot(subs[count])
             plt.plot(values,label='3 min forecast',color='k')
-            plt.plot(self.true_values[point]['y_hold_out'],label='true {}'.format(point),color='c')
+            plt.plot(np.insert(self.true_values[point]['y_hold_out'],0,[1.0,1.0]),label='true {}'.format(point),color='c')
             plt.legend()
             count += 1
         plt.savefig('forecast_2.png', bbox_inches='tight', dpi=300)

@@ -18,7 +18,7 @@ class prepare_data:
         self.all_frames = [('point_{}'.format(point),self.df[self.df.point == point].reset_index(drop=True)[:31184])\
                                                                                             for point in point_list]
 
-    def time_series_to_regression(self, forecast=3, past=60):
+    def time_series_to_regression(self, forecast=5, past=60):
         '''
         Takes data for all points that currently is in time series format and converts
         it to a form that can be be used in regressions. It also saves a little bit

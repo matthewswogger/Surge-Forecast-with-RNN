@@ -65,5 +65,6 @@ class train_models:
         averages them to give us the overall mean squared error of the
         entire model.
         '''
+        # np.append(np.delete(np.delete(self.data_dict[point]['y_hold_out'],0,0),0,0),[1,1])
         return np.mean([np.mean((prediction - self.data_dict[point]['y_hold_out'])**2) \
                                                     for point, prediction in self.predict_hold_out_dict.iteritems()])
