@@ -2,7 +2,7 @@
 
 Matthew Swogger, October 2016
 
-#### Overview
+#### Inspiration
 
 My capstone project for Galvanize Data Science Immersive was about forecasting
 the Surge multiplier for Uber Rideshare drivers. The idea was to see if I could
@@ -26,6 +26,57 @@ forecast well enough, with about an 89% accuracy, and it passed the 'would this
 actually be useful to me if I was trying to make money Rideshareing,' it would
 be a nice little addition. But it got me thinking about other ways to implement
 this.
+
+### Overview
+
+One way to deal with time series data is to just get rid of the time series
+nature of it all together. For example, take a weeks worth of on the minute
+surge data for one point, that's univariate 10,080 entries, and just treat this
+as your target variable `y`, so that's 10,080 data points. To create my `X` I
+took the first 60 lags and assigned those as the features for the target
+variable. I then remove lags 1-5 to create the 5 minute forecast. Now you can
+run any sort of Regression model that you want on the data.
+
+### Be careful though
+
+One thing to keep in mind before I go running `train_test_split` is that this
+randomizes the data. This is what I want when running Regressions but it does
+make graphing your predicted forecast impossible because it both gets rid of
+order and is different every time the model is run so the graph will be different
+and useless. I make sure to set aside a portion of data that will never be
+randomized preserving it's time series nature.
+
+### What Regression model is best?
+
+Because I don't care if the model is interpretable it opens me up to models
+other than Linear Regression, so I wanted to compare as many as I could think of.
+So I cooked up a helper class to help with performing grid search on all of
+them. The class is called `EstimatorSelectionHelper()` and has two methods
+`.fit()` and `.score_summary()`. This takes in a dictionary of all of the models
+you want to grid search and another dictionary of the parameters you want to
+use in your grid search for all of the models. These were the models and
+parameters that I used:
+
+```python
+models1 = {'LinearRegression':LinearRegression(),
+           'Ridge':Ridge(),
+           'Lasso':Lasso(),
+           'ExtraTreesRegressor':ExtraTreesRegressor(),
+           'RandomForestRegressor':RandomForestRegressor(),
+           'AdaBoostRegressor':AdaBoostRegressor(),
+           'GradientBoostingRegressor':GradientBoostingRegressor()}
+
+params1 = {'LinearRegression':{},
+           'Ridge':{'alpha':[0.001, 0.01, 0.1, 1.0]},
+           'Lasso':{'alpha':[0.001, 0.01, 0.1, 1.0]},
+           'ExtraTreesRegressor':{'n_estimators':[8,16,32,64,128]},
+           'RandomForestRegressor':{'n_estimators':[8,16,32,64,128]},
+           'AdaBoostRegressor':{'n_estimators':[8,16,32,64,128],'learning_rate':[0.6,0.8,1.0]},
+           'GradientBoostingRegressor':{'n_estimators':[8,16,32,64,128],'learning_rate':[0.6,0.8,1.0]}}
+```
+After grid searching all of this a pandas dataframe is printed with the results
+and sorted to have the best performing one on top. What ended up being the best
+performing model was `ExtraTreesRegressor(n_estimators=128)`.
 
 ## Forecast of first 8 points
 
