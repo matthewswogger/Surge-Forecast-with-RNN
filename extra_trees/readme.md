@@ -1,8 +1,8 @@
-## Surge Forecast
+# Surge Forecast
 
 Matthew Swogger, October 2016
 
-#### Inspiration
+## Inspiration
 
 My capstone project for Galvanize Data Science Immersive was about forecasting
 the Surge multiplier for Uber Rideshare drivers. The idea was to see if I could
@@ -27,7 +27,7 @@ actually be useful to me if I was trying to make money Rideshareing,' it would
 be a nice little addition. But it got me thinking about other ways to implement
 this.
 
-### Overview
+## Overview
 
 One way to deal with time series data is to just get rid of the time series
 nature of it all together. For example, take a weeks worth of on the minute
@@ -37,7 +37,7 @@ took the first 60 lags and assigned those as the features for the target
 variable. I then remove lags 1-5 to create the 5 minute forecast. Now you can
 run any sort of Regression model that you want on the data.
 
-### Be careful though
+## Be careful though
 
 One thing to keep in mind before I go running `train_test_split` is that this
 randomizes the data. This is what I want when running Regressions but it does
@@ -46,16 +46,16 @@ order and is different every time the model is run so the graph will be differen
 and useless. I make sure to set aside a portion of data that will never be
 randomized preserving it's time series nature.
 
-### What Regression model is best?
+## What Regression model is best?
 
 Because I don't care if the model is interpretable it opens me up to models
 other than Linear Regression, so I wanted to compare as many as I could think of.
 So I cooked up a helper class to help with performing grid search on all of
 them. The class is called `EstimatorSelectionHelper()` and has two methods
-`.fit()` and `.score_summary()`. This takes in a dictionary of all of the models
-you want to grid search and another dictionary of the parameters you want to
-use in your grid search for all of the models. These were the models and
-parameters that I used:
+`.fit()` and `.score_summary()`, it can be viewed in `grid_search_helper.py`.
+This takes in a dictionary of all of the models you want to grid search and
+another dictionary of the parameters you want to use in your grid search for all
+of the models. These were the models and parameters that I used:
 
 ```python
 models1 = {'LinearRegression':LinearRegression(),
@@ -78,11 +78,13 @@ After grid searching all of this a pandas dataframe is printed with the results
 and sorted to have the best performing one on top. What ended up being the best
 performing model was `ExtraTreesRegressor(n_estimators=128)`.
 
-## Forecast of first 8 points
+## Enough talk, show me pretty graphs
+
+### Forecast of first 8 points
 
 ![](forecast_1.png)
 
-## Forecast of second 8 points
+### Forecast of second 8 points
 
 ![](forecast_2.png)
 
