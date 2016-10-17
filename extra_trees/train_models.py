@@ -18,8 +18,8 @@ class train_models:
             '''
             Returns one ExtraTreesRegressor model.
             '''
-            return ExtraTreesRegressor(n_estimators=128).fit(X, y)
-
+            return ExtraTreesRegressor(n_estimators=128,n_jobs=-1,min_samples_leaf=10).fit(X, y)
+        
         self.model_dict = {}
         for key, value in self.data_dict.iteritems():
             self.model_dict[key] = to_train(value['X_train'], value['y_train'])
