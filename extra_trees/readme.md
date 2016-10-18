@@ -102,11 +102,11 @@ error of .05, cool.
 
 ### Forecast of first 8 points
 
-![](forecast_1.png)
+![](graphs/forecast_1.png)
 
 ### Forecast of second 8 points
 
-![](forecast_2.png)
+![](graphs/forecast_2.png)
 
 ## Models, lot's and lot's of Models
 
@@ -126,11 +126,11 @@ the surge is anything north of double price they are happy as can be.
 
 ### Actual
 
-![](actual.png)
+![](graphs/actual.png)
 
 ### Forecast
 
-![](forecast.png)
+![](graphs/forecast.png)
 
 ## Conclusion
 
