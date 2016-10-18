@@ -80,6 +80,24 @@ After grid searching all of this a pandas dataframe is printed with the results
 and sorted to have the best performing one on top. What ended up being the best
 performing model was `ExtraTreesRegressor(n_estimators=128)`.
 
+After settling on the ExtraTreesRegressor I then ran a second grid search on a
+few different parameters within it. While there are a number of parameters to
+choose from they all basically do one of two things; limit the number of features
+a tree can use to make decisions or limit the depth of the trees. I ended up
+allowing use of all the features and setting a max depth for trees of 12 so
+ended up with `ExtraTreesRegressor(n_estimators=128,n_jobs=-1,max_depth=12)`.
+
+## Autocorrelation and Differencing
+
+At this point I was getting around .08 mean squared error but I wanted to see
+what running Autocorrelation on the data would tell me about what lags have
+signal and could help narrow down what features to use. I also decided to
+difference the data and see if that could help. Both of these techniques gave
+worse results, but when I combine this with my original model by tacking on a few
+extra features in the form of differenced lags that I could see were correlated
+by checking out the autocorrelation the model improved and gave me a mean squared
+error of .05, cool.
+
 ## Enough talk, show me pretty graphs
 
 ### Forecast of first 8 points
@@ -98,12 +116,11 @@ viewed in `train_models.py` and it takes in the prepared data from earlier and
 runs extratrees on all 16 points. You simply run `.fit()` and then there is a
 method to predict on the `.predict_on_test_sets()` or the
 `.predict_on_hold_out_sets()` and you can compute the mean squared error  on the
-`.mse_on_test_sets()` or the `.mse_on_hold_out_sets()`.
-
-
-## Autocorrelation and Partial-Autocorrelation
-
-still need to do this, I think it will help, regardless I need to give it a go.
+`.mse_on_test_sets()` or the `.mse_on_hold_out_sets()`. The mean squared error
+on the hold out sets for all 16 points ends up being about .05, not bad. As you
+can see from the graphs above the forecast is pretty spot on, it has a few issues
+with forecasting surge above double the price, but from a driver standpoint if
+the surge is anything north of double price they are happy as can be.
 
 ## Surge Maps
 
@@ -117,7 +134,16 @@ still need to do this, I think it will help, regardless I need to give it a go.
 
 ## Conclusion
 
-RNN is the future of time series.
+As you can see from the beautiful maps above the forecasting model is
+performing well. If you were a driver looking to make money and you looked down
+at your phone and saw that forecast you'd know where to go and be there right
+when the surge hits.
+
+With that said, while I'm happy with the performance of this model, and it feels
+really good to know that time series forecasting can be done without an ARIMA
+model, I've been playing with RNN's trying to learn neural nets. So far it looks
+very promising, I think it will work even better than this and I will have a
+working RNN model in a GitHub repo soon, so stay tuned.
 
 #### Packages used
 

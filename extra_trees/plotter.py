@@ -38,7 +38,7 @@ class split_for_plot:
             plt.plot(np.insert(self.true_values[point]['y_hold_out'],0,[1.0,1.0]),label='true {}'.format(point),color='c')
             plt.legend()
             count += 1
-        plt.savefig('forecast_1.png', bbox_inches='tight', dpi=300)
+        # plt.savefig('forecast_1.png', bbox_inches='tight', dpi=300)
         plt.show()
 
     def plot_2(self):
@@ -58,5 +58,5 @@ class split_for_plot:
             plt.plot(np.insert(self.true_values[point]['y_hold_out'],0,[1.0,1.0]),label='true {}'.format(point),color='c')
             plt.legend()
             count += 1
-        plt.savefig('forecast_2.png', bbox_inches='tight', dpi=300)
+        # plt.savefig('forecast_2.png', bbox_inches='tight', dpi=300)
         plt.show()

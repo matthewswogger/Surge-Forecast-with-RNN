@@ -42,8 +42,15 @@ class prepare_data:
                                                                    'y_test':y_test}.
         '''
         for point, d_f in self.all_frames:
+            d_f['difference'] = d_f.surge.diff()
             array = np.array([d_f.surge[i:i+past] for i in xrange(len(d_f.surge)-past)])
             array = array[:,::-1]
+
+            array_dif = np.array([d_f.difference[i:i+past] for i in xrange(len(d_f.difference)-past)])
+            array_dif = array_dif[:,::-1]
+            array_dif = np.nan_to_num(array_dif)
+            array_dif = array_dif[:,[1,3,5,7,9,11,13,15]]
+            array = np.concatenate((array,array_dif), axis=1)
             # make a small hold out sample to conserve the timeseries nature of this, I'll graph it later
             hold_out_array = array[-500:,:]
             y_hold_out = hold_out_array[:,0]
@@ -56,6 +63,21 @@ class prepare_data:
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
             self.dataframe_dict[point]={'X':X, 'y':y, 'X_hold_out':X_hold_out, 'y_hold_out':y_hold_out,
                                 'X_train':X_train, 'X_test':X_test, 'y_train':y_train, 'y_test':y_test}
+        # for point, d_f in self.all_frames:
+        #     array = np.array([d_f.surge[i:i+past] for i in xrange(len(d_f.surge)-past)])
+        #     array = array[:,::-1]
+        #     # make a small hold out sample to conserve the timeseries nature of this, I'll graph it later
+        #     hold_out_array = array[-500:,:]
+        #     y_hold_out = hold_out_array[:,0]
+        #     X_hold_out = hold_out_array[:,forecast:]
+        #
+        #     # this is for the classical model training and testing
+        #     training_testing_array = array[:-500,:]
+        #     y = training_testing_array[:,0]
+        #     X = training_testing_array[:,forecast:]
+        #     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+        #     self.dataframe_dict[point]={'X':X, 'y':y, 'X_hold_out':X_hold_out, 'y_hold_out':y_hold_out,
+        #                         'X_train':X_train, 'X_test':X_test, 'y_train':y_train, 'y_test':y_test}
 
     def get_point_data(self):
         '''
