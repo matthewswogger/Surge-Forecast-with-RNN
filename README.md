@@ -14,8 +14,9 @@ Shakespeare and even the Star Wars movies. How is this possible? Long Short
 Term Memory (LSTM) cells. The way a Recurrent NN is designed allows it to learn
 from past words, letters, or as is my case lags of time. All of these scenarios
 are sequential, they all rely on the things that came before it, and that's all
-time series is really. The LSTM layer, or layers have gates inside of the cells
-that can forget or remember certain information.
+time series is really. The LSTM layer, or layers have three different gates
+inside of the cells, one to decide whether to let new info in, one to decide to
+erase the state or not, and one to decide what info to output.
 
 ## My Model so far
 The results are good, almost annoyingly good actually. Since I am still learning
