@@ -1,2 +1,2 @@
-model_checkpoint_path: "model_150_epoch.tfl"
-all_model_checkpoint_paths: "model_150_epoch.tfl"
+model_checkpoint_path: "125_epoch_act_tanh_nunits_128.tfl"
+all_model_checkpoint_paths: "125_epoch_act_tanh_nunits_128.tfl"
