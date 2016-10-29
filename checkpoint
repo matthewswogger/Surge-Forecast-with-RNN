@@ -1,2 +1,0 @@
-model_checkpoint_path: "125_epoch_act_softsign_nunits_64.tfl"
-all_model_checkpoint_paths: "125_epoch_act_softsign_nunits_64.tfl"
