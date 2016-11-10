@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 
 
 def graph_em(test, forecast, graph_name):
-    subs = {0:811, 1:812, 2:813, 3:814, 4:815, 5:816, 6:817, 7:818}
-    plt.figure(figsize=(20,25))
+    subs = {0:421, 1:422, 2:423, 3:424, 4:425, 5:426, 6:427, 7:428}
+    plt.figure(figsize=(16,8))
     for i, point in enumerate(test.T):
         plt.subplot(subs[i])
         plt.title('History='+str(steps_of_history)+', Future='+str(steps_in_future))
@@ -18,7 +18,9 @@ def graph_em(test, forecast, graph_name):
         plt.legend()
 
 #     plt.savefig(graph_name, bbox_inches='tight', dpi=300)
+    plt.tight_layout()
     plt.show()
+
 
 conn = sqlite3.connect('surge_data.db')
 c = conn.cursor()
