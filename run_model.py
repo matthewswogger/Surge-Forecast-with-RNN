@@ -41,7 +41,6 @@ conn.close()
 STEPS_OF_HISTORY = 30 # how far back in time I look
 STEPS_IN_FUTURE = 5 # how far in future I forecast
 FEATURES = 16 # number of features in model
-
 SPLIT = -1000 # where I make my train test split, this gives about 16.5 hours of test data
 
 # prepare data for model
@@ -69,10 +68,14 @@ net = tf.regression(net, optimizer='sgd', loss='mean_square', learning_rate=0.3)
 model = tf.DNN(net, clip_gradients=0.0, tensorboard_verbose=0)
 
 # Training
-# model.fit(trainX, trainY, n_epoch=25, validation_set=0.1, batch_size=128)
-
-# Manually save model
-# model.save("saved_model/150_epoch_act_softsign_nunits_128.tfl")
+# EPOCHS = 10
+# epochs_performed = 10
+# for _ in xrange(20):
+#     # Fit model
+#     model.fit(trainX, trainY, n_epoch=EPOCHS, validation_set=0.1, batch_size=128)
+#     # Save model
+#     epochs_performed += 10
+#     model.save("saved_model/{}_epoch_act_softsign_nunits_128.tfl".format(epochs_performed))
 
 # Load a model
 model.load("saved_model/150_epoch_act_softsign_nunits_128.tfl")
