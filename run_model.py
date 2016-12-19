@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def graph_em(test, forecast, graph_name):
+def forecast_graphs(test, forecast, graph_name):
     subs = {0:421, 1:422, 2:423, 3:424, 4:425, 5:426, 6:427, 7:428}
     plt.figure(figsize=(16,8))
     for i, point in enumerate(test.T):
@@ -69,7 +69,7 @@ model = tf.DNN(net, clip_gradients=0.0, tensorboard_verbose=0)
 
 # Training
 # EPOCHS = 10
-# epochs_performed = 10
+# epochs_performed = 0
 # for _ in xrange(20):
 #     # Fit model
 #     model.fit(trainX, trainY, n_epoch=EPOCHS, validation_set=0.1, batch_size=128)
@@ -88,6 +88,6 @@ print ('Mean Squared Error: {}%'.format(round(np.mean((predictY - testY)**2)*100
 print ('')
 
 # print graphs of surge forecast
-graph_em(testY[:,:8], predictY[:,:8], 'forecast_1.png')
+forecast_graphs(testY[:,:8], predictY[:,:8], 'forecast_1.png')
 
-graph_em(testY[:,8:], predictY[:,8:], 'forecast_2.png')
+forecast_graphs(testY[:,8:], predictY[:,8:], 'forecast_2.png')
