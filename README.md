@@ -32,10 +32,10 @@ It looks like this:
 
 ```python
 # Build my neural net
-net = tf.input_data(shape=[None, steps_of_history, 16])
+net = tf.input_data(shape=[None, STEPS_OF_HISTORY, FEATURES])
 net = tf.lstm(net, 256, return_seq=False)
 net = tf.dropout(net, 0.5)
-net = tf.fully_connected(net, 16, activation='linear')
+net = tf.fully_connected(net, FEATURES, activation='linear')
 net = tf.regression(net, optimizer='sgd', loss='mean_square', learning_rate=0.3)
 ```
 
@@ -54,9 +54,9 @@ It now looks like this:
 
 ```python
 # Build my neural net
-net = tf.input_data(shape=[None, steps_of_history, 16])
+net = tf.input_data(shape=[None, STEPS_OF_HISTORY, FEATURES])
 net = tf.lstm(net, n_units=128, activation='softsign', return_seq=False)
-net = tf.fully_connected(net, 16, activation='linear')
+net = tf.fully_connected(net, FEATURES, activation='linear')
 net = tf.regression(net, optimizer='sgd', loss='mean_square', learning_rate=0.3)
 ```
 
